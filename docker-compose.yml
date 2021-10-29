@@ -24,6 +24,7 @@ services:
     volumes:
       - ./example:/home/node/app
       - node_modules:/home/node/app/node_modules
+      - directus_extensions:/home/node/app/extensions
     ports:
       - "8055:8055"
     depends_on:
@@ -32,3 +33,4 @@ services:
 volumes:
   db-data:
   node_modules:
+  directus_extensions:
