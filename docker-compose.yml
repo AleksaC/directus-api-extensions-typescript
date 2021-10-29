@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:14-bullseye
+    init: true
+    environment:
+      - POSTGRES_PASSWORD=whatever
+    volumes:
+      - db-data:/var/lib/postgresql/data
+      - ./db/init_db.sql:/docker-entrypoint-initdb.d/create_db.sql
+    ports:
+      - "5433:5432"
+    restart: unless-stopped
+
+  directus:
+    build:
+      context: example
+      dockerfile: Dockerfile
+    init: true
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+    volumes:
+      - ./example:/home/node/app
+      - node_modules:/home/node/app/node_modules
+    ports:
+      - "8055:8055"
+    depends_on:
+      - db
+
+volumes:
+  db-data:
+  node_modules:

@@ -1,0 +1,12 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "directus start",
+    "start": "directus start",
+    "directus": "directus"
+  },
+  "dependencies": {
+    "directus": "^9.0.0-rc.99",
+    "pg": "^8.7.1"
+  }
+}
