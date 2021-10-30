@@ -2,8 +2,8 @@ FROM node:16-bullseye
 
 RUN : \
     && apt-get update \
-    # Needed by tree-kill
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+        # Needed by tree-kill
         procps \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
