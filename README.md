@@ -1,5 +1,9 @@
 # Directus hook typescript example
 
+**Update:** This was created before `v9.0.0` of directus which changed the way
+extensions are registered. The code here may still work on new versions, but
+I'll still try to update it if I have time.
+
 [Directus](https://directus.io/) is a good choice if you need to provide a simple
 CRUD dashboard for your project without having to build one yourself or shoehorning
 a CMS on top of the existing database.
@@ -24,6 +28,7 @@ following command to get the example up and running:
 ```shell
 git clone git@github.com:AleksaC/directus-api-extensions-typescript.git
 cd directus-api-extensions-typescript
+cp example/.env.example example/.env
 ./bootstrap.sh
 ```
 
