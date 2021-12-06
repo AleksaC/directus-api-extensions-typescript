@@ -5,7 +5,6 @@ import { spawn } from "child_process";
 import { Configuration } from "webpack";
 import { TsconfigPathsPlugin } from "tsconfig-paths-webpack-plugin";
 import { merge } from "webpack-merge";
-import kill from "tree-kill";
 import nodeExternals from "webpack-node-externals";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 
@@ -77,9 +76,11 @@ const directusRestartPlugin = () => {
           prevHash = compilation.fullHash;
 
           if (subprocess) {
-            kill(subprocess.pid);
+            process.kill(subprocess.pid, "SIGINT");
           }
-          subprocess = spawn("npm", ["start"]);
+          // Used instead of npm start since it doesn't propagate signals correctly
+          subprocess = spawn("node", ["node_modules/.bin/directus", "start"]);
+          console.log(subprocess.pid);
 
           let stdout = Buffer.alloc(0);
           let stderr = Buffer.alloc(0);
